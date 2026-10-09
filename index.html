@@ -316,7 +316,73 @@ const GAMES = [
   { id: 19, title: "Bloons TD 5",     category: "Strategy", emoji: "🎈", url: "https://ninjakiwi.com/Games/Tower-Defense/Play/Bloons-Tower-Defense-5.html" },
   { id: 20, title: "Geometry Dash",   category: "Action",   emoji: "🔺", url: "https://geometrydash.io/" },
 ];
+const GAMES = [
+  // ── CLASSIC ──
+  { id: 1,  title: "Snake",              category: "Classic",  emoji: "🐍", url: "https://www.google.com/fbx?fbx=snake_arcade" },
+  { id: 2,  title: "Tetris",             category: "Classic",  emoji: "🟦", url: "https://tetris.com/play-tetris" },
+  { id: 3,  title: "Pac-Man",            category: "Classic",  emoji: "👾", url: "https://freepacman.org/" },
+  { id: 4,  title: "Space Invaders",     category: "Classic",  emoji: "🛸", url: "https://spaceinvaders.cc/" },
+  { id: 5,  title: "Asteroids",          category: "Classic",  emoji: "☄️", url: "https://www.retrogames.cc/arcade-games/asteroids-rev-4.html" },
+  { id: 6,  title: "Frogger",            category: "Classic",  emoji: "🐸", url: "https://www.retrogames.cc/arcade-games/frogger.html" },
+  { id: 7,  title: "Donkey Kong",        category: "Classic",  emoji: "🦍", url: "https://www.retrogames.cc/arcade-games/donkey-kong.html" },
+  { id: 8,  title: "Breakout",           category: "Classic",  emoji: "🧱", url: "https://www.retrogames.cc/arcade-games/super-breakout.html" },
 
+  // ── PUZZLE ──
+  { id: 9,  title: "2048",               category: "Puzzle",   emoji: "🔢", url: "https://play2048.co/" },
+  { id: 10, title: "Sudoku",             category: "Puzzle",   emoji: "🔲", url: "https://sudoku.com/" },
+  { id: 11, title: "Minesweeper",        category: "Puzzle",   emoji: "💣", url: "https://minesweeper.online/" },
+  { id: 12, title: "Wordle",             category: "Puzzle",   emoji: "🟩", url: "https://www.nytimes.com/games/wordle/index.html" },
+  { id: 13, title: "Mahjong",            category: "Puzzle",   emoji: "🀄", url: "https://www.mahjong.org/" },
+  { id: 14, title: "Jigsaw Planet",      category: "Puzzle",   emoji: "🧩", url: "https://www.jigsawplanet.com/" },
+  { id: 15, title: "Nonograms",          category: "Puzzle",   emoji: "🖼️", url: "https://www.nonograms.org/" },
+  { id: 16, title: "Nurikabe",           category: "Puzzle",   emoji: "🌊", url: "https://www.puzzle-nurikabe.com/" },
+
+  // ── ACTION ──
+  { id: 17, title: "Slope",              category: "Action",   emoji: "🏔️", url: "https://slope-game.github.io/" },
+  { id: 18, title: "Run 3",              category: "Action",   emoji: "🏃", url: "https://www.coolmathgames.com/0-run-3" },
+  { id: 19, title: "Geometry Dash",      category: "Action",   emoji: "🔺", url: "https://geometrydash.io/" },
+  { id: 20, title: "Paper.io 2",         category: "Action",   emoji: "📄", url: "https://paper-io.com/" },
+  { id: 21, title: "Agar.io",            category: "Action",   emoji: "🔵", url: "https://agar.io/" },
+  { id: 22, title: "Slither.io",         category: "Action",   emoji: "🐛", url: "https://slither.io/" },
+  { id: 23, title: "Tunnel Rush",        category: "Action",   emoji: "🕳️", url: "https://tunnelrush.io/" },
+  { id: 24, title: "Temple Run",         category: "Action",   emoji: "🏛️", url: "https://poki.com/en/g/temple-run-2" },
+  { id: 25, title: "Subway Surfers",     category: "Action",   emoji: "🛹", url: "https://poki.com/en/g/subway-surfers" },
+  { id: 26, title: "Vex 6",             category: "Action",   emoji: "🤸", url: "https://poki.com/en/g/vex-6" },
+
+  // ── SHOOTER ──
+  { id: 27, title: "1v1.LOL",            category: "Shooter",  emoji: "🎯", url: "https://1v1.lol/" },
+  { id: 28, title: "Zombs Royale",       category: "Shooter",  emoji: "🧟", url: "https://zombsroyale.io/" },
+  { id: 29, title: "Bullet Force",       category: "Shooter",  emoji: "🔫", url: "https://poki.com/en/g/bullet-force-multiplayer" },
+  { id: 30, title: "Shell Shockers",     category: "Shooter",  emoji: "🥚", url: "https://shellshock.io/" },
+  { id: 31, title: "Krunker.io",         category: "Shooter",  emoji: "🎮", url: "https://krunker.io/" },
+  { id: 32, title: "Rooftop Snipers",    category: "Shooter",  emoji: "🏙️", url: "https://poki.com/en/g/rooftop-snipers" },
+
+  // ── STRATEGY ──
+  { id: 33, title: "Chess",              category: "Strategy", emoji: "♟️", url: "https://www.chess.com/play/computer" },
+  { id: 34, title: "Bloons TD 5",        category: "Strategy", emoji: "🎈", url: "https://ninjakiwi.com/Games/Tower-Defense/Play/Bloons-Tower-Defense-5.html" },
+  { id: 35, title: "Kingdom Rush",       category: "Strategy", emoji: "🏰", url: "https://www.kongregate.com/games/Ironhidegames/kingdom-rush" },
+  { id: 36, title: "Checkers",           category: "Strategy", emoji: "⚫", url: "https://www.247checkers.com/" },
+  { id: 37, title: "Battleship",         category: "Strategy", emoji: "⚓", url: "https://www.battleshiponline.org/" },
+
+  // ── RACING ──
+  { id: 38, title: "Drift Hunters",      category: "Racing",   emoji: "🚗", url: "https://drifthunters.io/" },
+  { id: 39, title: "Moto X3M",           category: "Racing",   emoji: "🏍️", url: "https://poki.com/en/g/moto-x3m" },
+  { id: 40, title: "Road Fury",          category: "Racing",   emoji: "🛣️", url: "https://poki.com/en/g/road-fury" },
+  { id: 41, title: "Burnout Drift",      category: "Racing",   emoji: "🔥", url: "https://poki.com/en/g/burnout-drift" },
+  { id: 42, title: "Traffic Jam 3D",     category: "Racing",   emoji: "🚦", url: "https://poki.com/en/g/traffic-jam-3d" },
+
+  // ── SPORTS ──
+  { id: 43, title: "Retro Bowl",         category: "Sports",   emoji: "🏈", url: "https://retrobowl.me/" },
+  { id: 44, title: "Basketball Stars",   category: "Sports",   emoji: "🏀", url: "https://poki.com/en/g/basketball-stars" },
+  { id: 45, title: "Soccer Skills",      category: "Sports",   emoji: "⚽", url: "https://poki.com/en/g/soccer-skills-world-cup" },
+  { id: 46, title: "Mini Golf",          category: "Sports",   emoji: "⛳", url: "https://poki.com/en/g/mini-golf-club" },
+  { id: 47, title: "Table Tennis",       category: "Sports",   emoji: "🏓", url: "https://poki.com/en/g/table-tennis-world-tour" },
+
+  // ── IDLE ──
+  { id: 48, title: "Cookie Clicker",     category: "Idle",     emoji: "🍪", url: "https://orteil.dashnet.org/cookieclicker/" },
+  { id: 49, title: "Adventure Capitalist",category: "Idle",    emoji: "💰", url: "https://www.kongregate.com/games/Hyper_Hippo/adventure-capitalist" },
+  { id: 50, title: "Clicker Heroes",     category: "Idle",     emoji: "⚔️", url: "https://www.clickerheroes.com/" },
+];
 // ─── STATE ────────────────────────────────────────────────────────────────────
 
 let activeCategory = "All";
