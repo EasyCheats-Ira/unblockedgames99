@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Unblocked Games</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0f0f13;
+      --surface:  #1a1a24;
+      --border:   #2a2a3a;
+      --accent:   #7c5cbf;
+      --accent2:  #a07ee8;
+      --text:     #e2e2f0;
+      --muted:    #888899;
+      --card-bg:  #16161f;
+      --radius:   10px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent2);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: var(--text); }
+
+    #search {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 8px 14px;
+      color: var(--text);
+      font-size: 0.9rem;
+      width: 240px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    #search:focus { border-color: var(--accent); }
+
+    #search::placeholder { color: var(--muted); }
+
+    /* ── CATEGORIES ── */
+    .categories {
+      display: flex;
+      gap: 8px;
+      padding: 16px 24px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .cat-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 14px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .cat-btn:hover,
+    .cat-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* ── GRID ── */
+    .grid-wrap {
+      padding: 24px;
+    }
+
+    .grid-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 6px 24px rgba(124,92,191,0.25);
+    }
+
+    .card-thumb {
+      width: 100%;
+      aspect-ratio: 16/10;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      user-select: none;
+    }
+
+    .card-info {
+      padding: 10px 12px 12px;
+    }
+
+    .card-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-cat {
+      font-size: 0.74rem;
+      color: var(--muted);
+    }
+
+    .no-results {
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 40px 0;
+      text-align: center;
+      grid-column: 1/-1;
+    }
+
+    /* ── MODAL / PLAYER ── */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .overlay.open { display: flex; }
+
+    .player-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 960px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .player-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .player-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .player-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-icon {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-icon:hover { border-color: var(--accent); background: var(--accent); }
+
+    .player-frame {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border: none;
+      background: #000;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      border-top: 1px solid var(--border);
+      margin-top: 24px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      #search { width: 100%; }
+      header { flex-direction: column; align-items: flex-start; }
+      .grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">unblocked<span>.games</span></div>
+  <input type="text" id="search" placeholder="Search games…" autocomplete="off"/>
+</header>
+
+<!-- CATEGORIES -->
+<div class="categories" id="cats"></div>
+
+<!-- GRID -->
+<div class="grid-wrap">
+  <div class="grid-label" id="grid-label">All Games</div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<footer>
+  just games. no ads. no login. no bullshit.
+</footer>
+
+<!-- PLAYER OVERLAY -->
+<div class="overlay" id="overlay">
+  <div class="player-box">
+    <div class="player-header">
+      <span class="player-title" id="player-title">Game</span>
+      <div class="player-actions">
+        <button class="btn-icon" id="btn-fullscreen">⛶ fullscreen</button>
+        <button class="btn-icon" id="btn-close">✕ close</button>
+      </div>
+    </div>
+    <iframe
+      class="player-frame"
+      id="player-frame"
+      src=""
+      allowfullscreen
+      allow="autoplay; fullscreen"
+      sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+    ></iframe>
+  </div>
+</div>
+
+<script>
+// ─── GAME DATA ────────────────────────────────────────────────────────────────
+// ADD YOUR GAMES HERE.
+// url: direct link to the playable HTML game (itch.io embed, github pages game, etc.)
+// emoji: thumbnail placeholder (swap with actual img src if you have thumbnails)
+
+const GAMES = [
+  { id: 1,  title: "2048",            category: "Puzzle",   emoji: "🔢", url: "https://play2048.co/" },
+  { id: 2,  title: "Snake",           category: "Classic",  emoji: "🐍", url: "https://www.google.com/fbx?fbx=snake_arcade" },
+  { id: 3,  title: "Tetris",          category: "Classic",  emoji: "🟦", url: "https://tetris.com/play-tetris" },
+  { id: 4,  title: "Pac-Man",         category: "Classic",  emoji: "👾", url: "https://freepacman.org/" },
+  { id: 5,  title: "Slope",           category: "Action",   emoji: "🏔️", url: "https://slope-game.github.io/" },
+  { id: 6,  title: "Run 3",           category: "Action",   emoji: "🏃", url: "https://www.coolmathgames.com/0-run-3" },
+  { id: 7,  title: "1v1.LOL",         category: "Shooter",  emoji: "🎯", url: "https://1v1.lol/" },
+  { id: 8,  title: "Chess",           category: "Strategy", emoji: "♟️", url: "https://www.chess.com/play/computer" },
+  { id: 9,  title: "Sudoku",          category: "Puzzle",   emoji: "🔲", url: "https://sudoku.com/" },
+  { id: 10, title: "Minesweeper",     category: "Puzzle",   emoji: "💣", url: "https://minesweeper.online/" },
+  { id: 11, title: "Cookie Clicker",  category: "Idle",     emoji: "🍪", url: "https://orteil.dashnet.org/cookieclicker/" },
+  { id: 12, title: "Wordle",          category: "Puzzle",   emoji: "🟩", url: "https://www.nytimes.com/games/wordle/index.html" },
+  { id: 13, title: "Drift Hunters",   category: "Racing",   emoji: "🚗", url: "https://drifthunters.io/" },
+  { id: 14, title: "Retro Bowl",      category: "Sports",   emoji: "🏈", url: "https://retrobowl.me/" },
+  { id: 15, title: "Paper.io 2",      category: "Action",   emoji: "📄", url: "https://paper-io.com/" },
+  { id: 16, title: "Agar.io",         category: "Action",   emoji: "🔵", url: "https://agar.io/" },
+  { id: 17, title: "Slither.io",      category: "Action",   emoji: "🐛", url: "https://slither.io/" },
+  { id: 18, title: "Zombs Royale",    category: "Shooter",  emoji: "🧟", url: "https://zombsroyale.io/" },
+  { id: 19, title: "Bloons TD 5",     category: "Strategy", emoji: "🎈", url: "https://ninjakiwi.com/Games/Tower-Defense/Play/Bloons-Tower-Defense-5.html" },
+  { id: 20, title: "Geometry Dash",   category: "Action",   emoji: "🔺", url: "https://geometrydash.io/" },
+];
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+
+let activeCategory = "All";
+let searchQuery    = "";
+
+// ─── CATEGORIES ───────────────────────────────────────────────────────────────
+
+const allCategories = ["All", ...new Set(GAMES.map(g => g.category))].sort((a,b) =>
+  a === "All" ? -1 : b === "All" ? 1 : a.localeCompare(b)
+);
+
+function renderCategories() {
+  const el = document.getElementById("cats");
+  el.innerHTML = allCategories.map(cat => `
+    <button class="cat-btn ${cat === activeCategory ? "active" : ""}"
+      onclick="setCategory('${cat}')">${cat}</button>
+  `).join("");
+}
+
+function setCategory(cat) {
+  activeCategory = cat;
+  renderCategories();
+  renderGrid();
+}
+
+// ─── GRID ─────────────────────────────────────────────────────────────────────
+
+function filteredGames() {
+  return GAMES.filter(g => {
+    const matchCat   = activeCategory === "All" || g.category === activeCategory;
+    const matchQuery = g.title.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchCat && matchQuery;
+  });
+}
+
+function renderGrid() {
+  const games = filteredGames();
+  const label = document.getElementById("grid-label");
+  const grid  = document.getElementById("grid");
+
+  label.textContent = activeCategory === "All"
+    ? `All Games (${games.length})`
+    : `${activeCategory} (${games.length})`;
+
+  if (games.length === 0) {
+    grid.innerHTML = `<div class="no-results">no games found for "${searchQuery}"</div>`;
+    return;
+  }
+
+  grid.innerHTML = games.map(g => `
+    <div class="card" onclick="openGame(${g.id})">
+      <div class="card-thumb">${g.emoji}</div>
+      <div class="card-info">
+        <div class="card-title">${g.title}</div>
+        <div class="card-cat">${g.category}</div>
+      </div>
+    </div>
+  `).join("");
+}
+
+// ─── PLAYER ───────────────────────────────────────────────────────────────────
+
+function openGame(id) {
+  const game   = GAMES.find(g => g.id === id);
+  if (!game) return;
+
+  const overlay = document.getElementById("overlay");
+  const frame   = document.getElementById("player-frame");
+  const title   = document.getElementById("player-title");
+
+  title.textContent = game.title;
+  frame.src = game.url;
+  overlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeGame() {
+  const overlay = document.getElementById("overlay");
+  const frame   = document.getElementById("player-frame");
+  overlay.classList.remove("open");
+  frame.src = "";
+  document.body.style.overflow = "";
+}
+
+function goFullscreen() {
+  const frame = document.getElementById("player-frame");
+  if (frame.requestFullscreen) frame.requestFullscreen();
+  else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
+}
+
+// ─── EVENTS ───────────────────────────────────────────────────────────────────
+
+document.getElementById("search").addEventListener("input", e => {
+  searchQuery = e.target.value;
+  renderGrid();
+});
+
+document.getElementById("btn-close").addEventListener("click", closeGame);
+document.getElementById("btn-fullscreen").addEventListener("click", goFullscreen);
+
+document.getElementById("overlay").addEventListener("click", e => {
+  if (e.target === document.getElementById("overlay")) closeGame();
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeGame();
+});
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+
+renderCategories();
+renderGrid();
+</script>
+</body>
+</html>
